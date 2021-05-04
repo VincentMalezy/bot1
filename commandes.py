@@ -78,5 +78,13 @@ async def hitman(ctx, dest: discord.Member):
     else:
         await ctx.channel.send('Ce joueur est un hater')
 
+@bot.command(name='dm')
+async def hitman(ctx, dest: discord.Member):
+    if (dest == None):
+        await ctx.channel.send("Choisi ta victime bg <3")
+    else:
+        await bot.send_message(dest, "message")
+
+
 bot.run(os.environ["DISCORD_TOKEN"])
 
