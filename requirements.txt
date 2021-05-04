@@ -1,3 +1,5 @@
+google
+googleapiclient
 git+https://github.com/Rapptz/discord.py
 dnspython==1.16.0
 pandas
