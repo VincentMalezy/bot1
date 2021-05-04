@@ -16,8 +16,8 @@ async def on_ready():
 @bot.command(name='aled')
 async def sendHelp(ctx):
     embedVar = discord.Embed(title="Aled", description="T'es un bouffon ? tkt cette aide va te permettre de kiffer la vibe\n", color=0x00ff00)
-    embedVar.add_field(name="delete", value="Supprime tout les messages du bot", inline=False)
-    embedVar.add_field(name="deleteAll", value="Supprime tout les messages du serveur", inline=False)
+    embedVar.add_field(name="delete", value="Supprime tous les messages du bot", inline=False)
+    embedVar.add_field(name="deleteAll", value="Supprime tous les messages du serveur", inline=False)
     embedVar.add_field(name="shrek", value="Envoie la plus belle image 4K disponible sur Internet", inline=False)
     embedVar.add_field(name="love", value="Envoie du love", inline=False)
     embedVar.set_footer(text="Hesite pas me faire des remarques (seulement positives sinon t mor)")
@@ -45,7 +45,7 @@ async def deleteAll(ctx):
 #send a shrek pic
 @bot.command(name='shrek')
 async def sendShrek(ctx):
-    await ctx.channel.send(file=discord.File(".\shrek.jpg"))
+    await ctx.channel.send(file=discord.File("shrek.jpg"))
 
 # send love
 @bot.command(name='love')
