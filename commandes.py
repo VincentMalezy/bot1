@@ -108,5 +108,4 @@ async def cours(ctx):
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
-# bot.run("ODM0MDYwMjYwMzA5NTk4MjA4.YH7ZJg.8rnwYyx19YfthDbEQtIaiyMMmoc")
 
