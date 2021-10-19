@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands
+import getEDT
 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
@@ -85,7 +86,27 @@ async def hitman(ctx, dest: discord.Member):
     else:
         await dest.send("jte baise")
 
+@bot.command(name='cours')
+async def cours(ctx):
+    cours = getEDT.getCours()
+    message = ""
+    for seance in cours:
+        matiere = seance.get('SUMMARY')
+        salle = seance.get('LOCATION')
+        heure = seance.get('DTSTART').dt.hour
+        min = seance.get('DTSTART').dt.minute
+
+        message += "Heure : " + str(heure+2) + " : " + str(min)  + "\n"
+        message += "Matiere : " + matiere  + "\n"
+        message += "Salle : " + salle + "\n"
+        message += "\n\n"
+
+
+
+    await ctx.channel.send(message)
+
+
 
 bot.run(os.environ["DISCORD_TOKEN"])
-#bot.run("ODM0MDYwMjYwMzA5NTk4MjA4.YH7ZJg.8rnwYyx19YfthDbEQtIaiyMMmoc")
+# bot.run("ODM0MDYwMjYwMzA5NTk4MjA4.YH7ZJg.8rnwYyx19YfthDbEQtIaiyMMmoc")
 
