@@ -80,7 +80,7 @@ async def hitman(ctx, dest: discord.Member):
         await ctx.channel.send('Ce joueur est un hater')
 
 @bot.command(name='dm')
-async def hitman(ctx, dest: discord.Member):
+async def dm(ctx, dest: discord.Member):
     if (dest == None):
         await ctx.channel.send("Choisi ta victime bg <3")
     else:

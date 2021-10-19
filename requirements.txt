@@ -1,3 +1,6 @@
+discord
+requests
+icalendar
 google
 google-api-python-client
 git+https://github.com/Rapptz/discord.py
