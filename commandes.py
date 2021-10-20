@@ -1,12 +1,16 @@
+import asyncio
 import os
 import discord
 from discord.ext import commands
 import getEDT
+from datetime import datetime
+import time
 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
 bot = commands.Bot(command_prefix="$")
+students = []
 
 
 @bot.event
@@ -88,24 +92,48 @@ async def dm(ctx, dest: discord.Member):
 
 @bot.command(name='cours')
 async def cours(ctx):
-    cours = getEDT.getCours()
-    message = ""
+    cours = getEDT.getCours(None)
+    message = "@everyone\n\n"
     for seance in cours:
-        matiere = seance.get('SUMMARY')
+        type = seance.get('SUMMARY')
         salle = seance.get('LOCATION')
         heure = seance.get('DTSTART').dt.hour
         min = seance.get('DTSTART').dt.minute
 
+        types = type.split('-')
+        type = types[0]
+        matiere = types[1].split(',')[0]
+
+        emoji = ""
+        if "CM" in type:
+            emoji += ":sleeping:"
+        elif "TD anglais" in type:
+            emoji += ":flag_gb: "
+        elif "TD" in type:
+            emoji += ":teacher: "
+        elif "TP" in type:
+            emoji += ":desktop: "
+        elif "Controle Continue" in type:
+            emoji += ":desktop: "
+
+
         message += "Heure : " + str(heure+2) + " : " + str(min)  + "\n"
+        message += emoji + type  + "\n"
         message += "Matiere : " + matiere  + "\n"
         message += "Salle : " + salle + "\n"
-        message += "\n\n"
+        message += "\n"
 
+    channel = bot.get_channel(900070458009981011)
+    await channel.send(message)
 
+async def automaticMessage():
+    await bot.wait_until_ready()
 
-    await ctx.channel.send(message)
+    while not bot.is_closed():
+        current_time = datetime.now().strftime('%H:%M')
+        if current_time == "22:45":
+            await cours(None)
+        await asyncio.sleep(61)
 
-
-
+bot.loop.create_task(automaticMessage())
 bot.run(os.environ["DISCORD_TOKEN"])
-
