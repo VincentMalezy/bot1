@@ -131,7 +131,7 @@ async def automaticMessage():
 
     while not bot.is_closed():
         current_time = datetime.now().strftime('%H:%M')
-        if current_time == "22:45":
+        if current_time == "20:00":
             await cours(None)
         await asyncio.sleep(61)
 
